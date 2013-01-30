@@ -48,7 +48,8 @@ void unGrabKey(Display *dpy, Window root, int keycode) {
 int main(int argc, char **argv) {
   if(argc < 2) {
     printf("usage: tr-trigger <triggers-per-TR>\n");
-    printf("Captures all 5s and emits a 9 for each TR\n");
+    printf("  captures all 5s and emits a 9 for each TR\n");
+    printf("  press 0 to exit\n");
     exit(1);
   }
 
@@ -79,8 +80,10 @@ int main(int argc, char **argv) {
           count = 0;
         } else count++;
       } else {
-        printf("unexpected keycode %d\n", ke->keycode);
-        exit(1);
+        /* With simultaneous keypresses X delivers both of them to the
+           listener, even if we didn't ask for them. So we send it
+           back on its way. */
+        sendKey(dpy, root, ke->keycode);
       }
     }
   }

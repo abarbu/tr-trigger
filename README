@@ -1,6 +1,7 @@
 Provide per-TR triggers for MRI machines that only support per-slice
 triggers. Assumes that triggers correspond to a keypress, 5, and
 produces a 9 every TR.
+Press 0 to exit.
 
 usage: tr-trigger <triggers-per-TR>
 
